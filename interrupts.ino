@@ -3,7 +3,7 @@
 //=================================
 void setInterruptDetails(void)
 {
-  calcTimerValues();                // Calculate all timer values
+  //calcTimerValues();                // Calculate all timer values
   noInterrupts();                   // Disable interrupts
   TCCR1A = 0;                       // Initialize Timer1 registers
   TCCR1B = 0;
@@ -14,13 +14,13 @@ void setInterruptDetails(void)
   TIMSK1 |= (1 << TOIE1);           // Enable Timer1 overflow interrupt
   interrupts();                     // Enable interrupts
 }
-
-//=================================
-//calcTimerValues() calculates all
-//6 portions of sampling cycle
-//=================================
-void calcTimerValues()
-{
+/*
+  //=================================
+  //calcTimerValues() calculates all
+  //6 portions of sampling cycle
+  //=================================
+  void calcTimerValues()
+  {
 
   float temp1, temp2, temp3, temp4, temp5, temp6, temp7;  // Intermediate calculation variables
   if (digitalRead(boostPin) == HIGH) {                   // Get boost switch position
@@ -54,7 +54,7 @@ void calcTimerValues()
   txPeriodCount = maxCount - int(temp6);                 // TX period count for Timer1
 
 
-}
+  }*/
 
 //=================================
 //ISR for timer events
@@ -89,29 +89,22 @@ ISR(TIMER1_OVF_vect)
       break;
 
     case 5:
-      TCNT1 = txPeriodBufferCount;                       // Load Timer1 with TX period count
+      TCNT1 = txPeriodCount;                       // Load Timer1 with TX period count
       PORTB |= (1 << 2);                           // EFE pulse disable
 
       //toggle audio pin state
-      digitalWrite(audioPin, !digitalRead(audioPin));
+      //digitalWrite(audioPin, !digitalRead(audioPin));
 
       //update counter to allow for periodic reading of delay pot
       if (readDelayPot == false)                   // Check if read delay pot flag is false
       {
-        readDelayCounter++;                        // Increment read delay counter
-        readDelayCounter = readDelayCounter % readDelayLimit;
-        if (!readDelayCounter)                      // Check if read delay counter is zero
-        {
-          readDelayPot = true;                     // Enable read of delay pot
-          debounceCounter++;
-          debounceCounter = debounceCounter % 10;  //10 counts per second
-        }
+        readDelayPot = true;                     // Enable read of delay pot
       }
       break;
-
+/*
     case 6:
       TCNT1 = txPeriodCount;
-      break;
+      break;*/
 
     default:
       TCNT1 = 0xfffd;
@@ -142,6 +135,6 @@ void intTimerOn(void)
 {
   noInterrupts();                   // Disable interrupts
   TIMSK1 |= (1 << TOIE1);           // Enable Timer1 overflow interrupt
-  intState=6;
+  intState = 6;
   interrupts();                     // Enable interrupts
 }
