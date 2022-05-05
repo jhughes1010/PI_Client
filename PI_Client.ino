@@ -43,13 +43,16 @@ void DelayPotRead( void)
 
 void receiveEvent(int howMany) {
   byte in[12];
+  int position = 0;
 
   while (Wire.available())
   {
-    int x = Wire.read();
-    debug(x);
+    position = position % 12;
+    in[position] = Wire.read();
+    debug(in[position]);
+    position++;
   }
-
+//Data is expected in LB/HB ordering
   txOnCount = in[0];
   txOnCount |= in[1] << 8;
 
