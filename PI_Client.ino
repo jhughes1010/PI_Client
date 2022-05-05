@@ -14,9 +14,13 @@ void setup()
   debugln("setup completed");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop()
+{
+  if (readDelayPot == true)
+  {
+    DelayPotRead();
+    readDelayPot = false;
+  }
 }
 
 void setIO(void)
@@ -52,7 +56,8 @@ void receiveEvent(int howMany) {
     debug(in[position]);
     position++;
   }
-//Data is expected in LB/HB ordering
+
+  //Data is expected in LB/HB ordering
   txOnCount = in[0];
   txOnCount |= in[1] << 8;
 

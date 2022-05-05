@@ -50,13 +50,10 @@ ISR(TIMER1_OVF_vect)
       TCNT1 = txPeriodCount;                       // Load Timer1 with TX period count
       PORTB |= (1 << 2);                           // EFE pulse disable
 
-      //toggle audio pin state
-      //digitalWrite(audioPin, !digitalRead(audioPin));
-
       //update counter to allow for periodic reading of delay pot
-      if (readDelayPot == false)                   // Check if read delay pot flag is false
+      if (readDelayPot == false)                  
       {
-        readDelayPot = true;                     // Enable read of delay pot
+        readDelayPot = true;                     
       }
       break;
 
