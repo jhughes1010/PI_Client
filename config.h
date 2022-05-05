@@ -32,13 +32,15 @@ byte delayPin = A0;      // Assign delay pot
 //=================================
 // Program variables
 //=================================
-word txOnCount  = 100;                           // TX pulse
-word mainDelayCount  = 200;                      // Main sample delay
-word mainSampleCount  = 50;                      // Main sample pulse
-word efeDelayCount  = 250;                       // EFE sample delay
-word efeSampleCount  = 50;                       // EFE sample pulse
+word txOnCount  = 2;                           // TX pulse
+word mainDelayCount  = 2;                      // Main sample delay
+word mainSampleCount  = 2;                      // Main sample pulse
+word efeDelayCount  = 2;                       // EFE sample delay
+word efeSampleCount  = 2;                       // EFE sample pulse
 word txPeriodCount  = 15000;                     // TX period
 word delayVal = 0;                               // Delay pot value
 bool readDelayPot = false;                       // Delay pot read (true or false)
+byte readDelayCounter = 0;                       // Read delay pot counter
+byte readDelayLimit = 100;
 byte intState = 0;                               // Interrupt state machine
 bool boost = false;

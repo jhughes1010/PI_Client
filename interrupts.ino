@@ -51,9 +51,14 @@ ISR(TIMER1_OVF_vect)
       PORTB |= (1 << 2);                           // EFE pulse disable
 
       //update counter to allow for periodic reading of delay pot
-      if (readDelayPot == false)                  
+      if (readDelayPot == false)
       {
-        readDelayPot = true;                     
+        readDelayCounter++;                        // Increment read delay counter
+        readDelayCounter = readDelayCounter % readDelayLimit;
+        if (!readDelayCounter)                      // Check if read delay counter is zero
+        {
+          readDelayPot = true;
+        }
       }
       break;
 
