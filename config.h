@@ -32,6 +32,7 @@ byte delayPin = A0;      // Assign delay pot
 //=================================
 // Program variables
 //=================================
+word maxCount = 0xffff;
 word txOnCount  = 2;                           // TX pulse
 word mainDelayCount  = 2;                      // Main sample delay
 word mainSampleCount  = 2;                      // Main sample pulse
