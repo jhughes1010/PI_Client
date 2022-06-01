@@ -2,6 +2,8 @@
 #include "config.h"
 #include <Wire.h>
 
+static bool LED = LOW;
+
 void setup()
 {
   Serial.begin(115200);
@@ -21,6 +23,7 @@ void loop()
     DelayPotRead();
     readDelayPot = false;
   }
+  digitalWrite(LED_BUILTIN, LED);
 }
 
 void setIO(void)
@@ -48,6 +51,8 @@ void DelayPotRead( void)
 void receiveEvent(int howMany) {
   byte in[12];
   int position = 0;
+
+  LED = !LED;
 
   while (Wire.available())
   {
