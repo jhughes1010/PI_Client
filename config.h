@@ -23,22 +23,32 @@
 //=================================
 // Pin assignments
 //=================================
-byte txPin = 8;          // Assign TX output
-byte mainSamplePin = 9;  // Assign main sample pulse
-byte efeSamplePin = 10;  // Assign EFE sample pulse
-byte delayPin = A0;      // Assign delay pot
+byte txPin = 8;
+byte mainSamplePin = 9;
+byte efeSamplePin = 10;
+byte delayPin = A0;
+byte boostPin = 12;
 
 
 //=================================
 // Program variables
 //=================================
 word maxCount = 0xffff;
-word txOnCount  = 2;                           // TX pulse
-word mainDelayCount  = 2;                      // Main sample delay
-word mainSampleCount  = 2;                      // Main sample pulse
-word efeDelayCount  = 2;                       // EFE sample delay
-word efeSampleCount  = 2;                       // EFE sample pulse
-word txPeriodCount  = 15000;                     // TX period
+
+struct Cycle
+{
+  word txWidthCount;
+  word sampleDelayCount;
+  word sampleWidthCount;
+  word efeDelayCount;
+  word efeWidthCount;
+  word aquirePeriod;
+};
+
+Cycle cycle;                                     // Counter values from HOST 
+Cycle countUp;                                   // Final CNT1 values to be set for count up to overflow
+
+
 word delayVal = 0;                               // Delay pot value
 bool readDelayPot = false;                       // Delay pot read (true or false)
 byte readDelayCounter = 0;                       // Read delay pot counter
