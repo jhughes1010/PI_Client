@@ -22,9 +22,9 @@ void loop()
 {
   if (readDelayPot == true)
   {
-    //Serial.println("RPOT");
+    readBoostSwitch();
     DelayPotRead();
     readDelayPot = false;
+    calcCNT1();
   }
-  digitalWrite(LED_BUILTIN, LED);
 }

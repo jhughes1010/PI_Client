@@ -19,6 +19,7 @@
 #define MS * 1E-3
 #define US * 1E-6
 #define NS * 1E-9
+#define BOOSTPOWERCOUNT 1600
 
 //=================================
 // Pin assignments

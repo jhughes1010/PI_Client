@@ -1,6 +1,6 @@
 void setDefaultTiming( void)
 {
-  cycle.txWidthCount = 252;
+  cycle.txWidthCount = 793;
   cycle.sampleDelayCount = 160;
   cycle.sampleWidthCount = 300;
   cycle.efeDelayCount = 3209;
@@ -38,5 +38,20 @@ void setIO(void)
 
 void DelayPotRead( void)
 {
-  delayVal = analogRead(delayPin);                   // Read the delay pot
+  delayVal = analogRead(delayPin);
+  cycle.sampleDelayCount = 0 + delayVal;
+}
+
+void readBoostSwitch (void)
+{
+  static word priorCount = cycle.txWidthCount;
+  if (digitalRead(boostPin) == HIGH)
+  {
+    cycle.txWidthCount = priorCount;
+  }
+  else
+  {
+    cycle.txWidthCount = BOOSTPOWERCOUNT;                                 
+  }
+  Serial.println(cycle.txWidthCount);
 }
