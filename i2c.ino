@@ -8,7 +8,9 @@ void receiveEvent(int howMany) {
   {
     position = position % 12;
     in[position] = Wire.read();
+    debug("\nStream:");
     debug(in[position]);
+    debug(" ");
     position++;
   }
 

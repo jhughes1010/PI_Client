@@ -8,6 +8,7 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println(NAME);
+  Serial.println(VERSION);
 
   setIO();
   setDefaultTiming();
@@ -16,6 +17,12 @@ void setup()
   Wire.begin(8);
   Wire.onReceive(receiveEvent);
   debugln("setup completed");
+  if (digitalRead(boostPin) == LOW)
+  {
+    setDefaultMinTiming();
+    calcCNT1();
+    debugln("Minimum timing enabled");
+  }
 }
 
 void loop()
@@ -26,5 +33,6 @@ void loop()
     DelayPotRead();
     readDelayPot = false;
     calcCNT1();
+    outputCNT();
   }
 }

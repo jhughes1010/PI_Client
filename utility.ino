@@ -1,10 +1,20 @@
 void setDefaultTiming( void)
 {
-  cycle.txWidthCount = 793;
-  cycle.sampleDelayCount = 160;
-  cycle.sampleWidthCount = 300;
-  cycle.efeDelayCount = 3209;
-  cycle.efeWidthCount = 176;
+  cycle.txWidthCount = 752;
+  cycle.sampleDelayCount = 241;
+  cycle.sampleWidthCount = 752;
+  cycle.efeDelayCount = 2654;
+  cycle.efeWidthCount = 736;
+  cycle.aquirePeriod = 15518;
+}
+
+void setDefaultMinTiming( void)
+{
+  cycle.txWidthCount = 1;
+  cycle.sampleDelayCount = 1;
+  cycle.sampleWidthCount = 1;
+  cycle.efeDelayCount = 1;
+  cycle.efeWidthCount = 1;
   cycle.aquirePeriod = 15518;
 }
 
@@ -23,7 +33,7 @@ void setIO(void)
   pinMode(txPin, OUTPUT);
   pinMode(mainSamplePin, OUTPUT);
   pinMode(efeSamplePin, OUTPUT);
-  pinMode(boostPin, INPUT);
+  pinMode(boostPin, INPUT_PULLUP);
 
   //LED and A1 defined
   pinMode(LED_BUILTIN, OUTPUT);
@@ -42,6 +52,24 @@ void DelayPotRead( void)
   cycle.sampleDelayCount = 0 + delayVal;
 }
 
+void outputCNT( void)
+{
+  debug("\n----------\nTX:");
+  debugln(cycle.txWidthCount);
+  debug("Sample Delay:");
+  debugln(cycle.sampleDelayCount);
+  debug("Sample Width:");
+  debugln(cycle.sampleWidthCount);
+  debug("EFE Delay:");
+  debugln(cycle.efeDelayCount);
+  debug("EFE Width:");
+  debugln(cycle.efeWidthCount);
+  debug("Aquire Period:");
+  debugln(cycle.aquirePeriod);
+}
+
+
+
 void readBoostSwitch (void)
 {
   static word priorCount = cycle.txWidthCount;
@@ -51,7 +79,7 @@ void readBoostSwitch (void)
   }
   else
   {
-    cycle.txWidthCount = BOOSTPOWERCOUNT;                                 
+    cycle.txWidthCount = BOOSTPOWERCOUNT;
   }
-  Serial.println(cycle.txWidthCount);
+  //debugln(cycle.txWidthCount);
 }
