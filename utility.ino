@@ -21,11 +21,13 @@ void setDefaultMinTiming( void)
 void calcCNT1( void)
 {
   countUp.txWidthCount = maxCount - cycle.txWidthCount;
+  debug("TX2");
+  debugln(cycle.txWidthCount);
   countUp.sampleDelayCount =  maxCount - cycle.sampleDelayCount;
   countUp.sampleWidthCount =  maxCount - cycle.sampleWidthCount;
   countUp.efeDelayCount =  maxCount - cycle.efeDelayCount;
   countUp.efeWidthCount =  maxCount - cycle.efeWidthCount;
-  countUp.aquirePeriod = maxCount - (cycle.txWidthCount + cycle.sampleDelayCount + cycle.sampleWidthCount + cycle.efeDelayCount + cycle.efeWidthCount);
+  countUp.aquirePeriod = maxCount - (cycle.aquirePeriod - (cycle.txWidthCount + cycle.sampleDelayCount + cycle.sampleWidthCount + cycle.efeDelayCount + cycle.efeWidthCount));
 }
 
 void setIO(void)

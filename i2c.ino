@@ -13,10 +13,13 @@ void receiveEvent(int howMany) {
     debug(" ");
     position++;
   }
+  debug("\n\n\n");
 
   //Data is expected in LB/HB ordering
   cycle.txWidthCount = in[0];
-  cycle.txWidthCount |= in[1] << 8;
+  cycle.txWidthCount |= (word)in[1] << 8;
+  debug("TX");
+  debugln(cycle.txWidthCount);
 
   cycle.sampleDelayCount = in[2];
   cycle.sampleDelayCount |= in[3] << 8;

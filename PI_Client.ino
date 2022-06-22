@@ -15,6 +15,7 @@ void setup()
   calcCNT1();
   setInterruptDetails();
   Wire.begin(8);
+  //Wire.end();
   Wire.onReceive(receiveEvent);
   debugln("setup completed");
   if (digitalRead(boostPin) == LOW)
@@ -29,10 +30,13 @@ void loop()
 {
   if (readDelayPot == true)
   {
-    readBoostSwitch();
+    //readBoostSwitch();
     DelayPotRead();
     readDelayPot = false;
     calcCNT1();
     outputCNT();
+    debug("TX loop: ");
+    debugln(countUp.txWidthCount);
+    digitalWrite(LED_BUILTIN, LED);
   }
 }

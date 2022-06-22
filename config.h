@@ -3,7 +3,7 @@
 #define VERSION "v1.0 - 2022"
 //#define CALIBRATE_OFFSETS
 
-//#define DEBUG 1
+#define DEBUG 1
 
 #if DEBUG == 1
 #define debug(x) Serial.print(x)
